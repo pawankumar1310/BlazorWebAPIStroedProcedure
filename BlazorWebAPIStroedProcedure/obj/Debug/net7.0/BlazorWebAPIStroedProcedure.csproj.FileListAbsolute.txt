@@ -38,3 +38,10 @@ E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\o
 E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\obj\Debug\net7.0\BlazorWebAPIStroedProcedure.pdb
 E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\obj\Debug\net7.0\BlazorWebAPIStroedProcedure.genruntimeconfig.cache
 E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\obj\Debug\net7.0\ref\BlazorWebAPIStroedProcedure.dll
+E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\bin\Debug\net7.0\ClosedXML.dll
+E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\bin\Debug\net7.0\DocumentFormat.OpenXml.dll
+E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\bin\Debug\net7.0\ExcelNumberFormat.dll
+E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\bin\Debug\net7.0\Irony.dll
+E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\bin\Debug\net7.0\SixLabors.Fonts.dll
+E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\bin\Debug\net7.0\System.IO.Packaging.dll
+E:\DotNet_Practice\TAG\BlazorWebAPIStroedProcedure\BlazorWebAPIStroedProcedure\bin\Debug\net7.0\XLParser.dll

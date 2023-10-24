@@ -23,39 +23,49 @@ namespace BlazorWebAPIStroedProcedure.Controllers
 
         [Route("AddStudentData")]
         [HttpPost]
-        public IActionResult Post([FromBody] Student student)
+        public IActionResult PostStudentData([FromBody] Student student)
         {
-            if (student != null && ModelState.IsValid)
+            try
             {
+                if (student != null && ModelState.IsValid)
+                {
 
-                bool success = _studentRepo.InsertStudent(
-                    student.StudentId, student.Gender, student.NationalIty, student.PlaceofBirth,
-                    student.StageId, student.GradeId, student.SectionId, student.Topic,
-                    student.Semester, student.Relation, student.Raisedhands.Value,
-                    student.VisItedResources.Value, student.AnnouncementsView.Value, student.Discussion.Value,
-                    student.ParentAnsweringSurvey, student.ParentschoolSatisfaction, student.StudentAbsenceDays,
-                    student.StudentMarks.Value, student.Class
-                );
-                if (success)
-                {
-                    _logger.LogInformation("Student data is inserted successfully");
-                    return Ok("Student data inserted successfully.");
-                }
-                else
-                {
-                    _logger.LogWarning("Student data not found");
-                    return BadRequest("Failed to insert student.");
+                    bool success = _studentRepo.InsertStudent(
+                        student.StudentId, student.Gender, student.NationalIty, student.PlaceofBirth,
+                        student.StageId, student.GradeId, student.SectionId, student.Topic,
+                        student.Semester, student.Relation, student.Raisedhands.Value,
+                        student.VisItedResources.Value, student.AnnouncementsView.Value, student.Discussion.Value,
+                        student.ParentAnsweringSurvey, student.ParentschoolSatisfaction, student.StudentAbsenceDays,
+                        student.StudentMarks.Value, student.Class
+                    );
+                    if (success)
+                    {
+                        _logger.LogInformation("Student data is inserted successfully");
+                        return Ok("Student data inserted successfully.");
+                    }
+                    else
+                    {
+                        _logger.LogWarning("Student data not found");
+                        return BadRequest("Failed to insert student.");
+                    }
                 }
             }
-            return BadRequest(ModelState);
+            catch (Exception ex)
+            {
 
+                _logger.LogError("Error Finding  the  student with specified id : {ErrorMessage}", ex.Message);
+                
+            }
+            return BadRequest(ModelState);
         }
 
         [HttpPut("updateStudentData/{id}")]
         //[HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] Student student)
+        public IActionResult PutStudentData(string id, [FromBody] Student student)
         {
-            bool success = _studentRepo.UpdateStudent(
+            try
+            {
+                bool success = _studentRepo.UpdateStudent(
                 id, student.Gender, student.NationalIty, student.PlaceofBirth,
                 student.StageId, student.GradeId, student.SectionId, student.Topic,
                 student.Semester, student.Relation, student.Raisedhands.Value,
@@ -63,22 +73,41 @@ namespace BlazorWebAPIStroedProcedure.Controllers
                 student.ParentAnsweringSurvey, student.ParentschoolSatisfaction, student.StudentAbsenceDays,
                 student.StudentMarks.Value, student.Class
             );
-            if (success)
-            {
-                return Ok("Student updated successfully.");
+                if (success)
+                {
+                    _logger.LogInformation("Student updated successfully,");
+                    return Ok("Student updated successfully.");
+                }
+                else
+                {
+                    _logger.LogWarning("Failed to update student.");
+                    return BadRequest("Failed to update student.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("Failed to update student.");
+
+                _logger.LogError("Error Finding  the  student with specified id : {ErrorMessage}", ex.Message);
             }
+            return BadRequest("Failed to update student.");
         }
 
         [Route("getAllStudentData")]
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetStudentsData()
         {
-            List<Student> students = _studentRepo.GetAllStudents();
-            return Ok(students);
+            try
+            {
+                List<Student> students = _studentRepo.GetAllStudents();
+                _logger.LogInformation("Successfully fetched !!");
+                return Ok(students);
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError("Error Finding  the  student : {ErrorMessage}", ex.Message);
+            }
+            return BadRequest(ModelState); 
         }
 
 
@@ -86,33 +115,55 @@ namespace BlazorWebAPIStroedProcedure.Controllers
         [Route("getStudentDataById")]
         [HttpGet]
         //[HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public IActionResult GetStudentDataById(string id)
         {
-            Student student = _studentRepo.GetStudentByID(id);
-            if (student != null)
+            try
             {
-                return Ok(student);
+                Student student = _studentRepo.GetStudentByID(id);
+                if (student != null)
+                {
+                    _logger.LogInformation("Student data successfull fetched!!");
+                    return Ok(student);
+                }
+                else
+                {
+                    _logger.LogWarning("Student data not found");
+                    return NotFound("Student not found.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return NotFound("Student not found.");
+
+                _logger.LogError("Error Finding  the  student with specified id : {ErrorMessage}", ex.Message);
             }
+            return BadRequest(ModelState);
         }
 
         [Route("deleteStudentData")]
         [HttpDelete]
         //[HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public IActionResult DeleteStudentData(string id)
         {
-            bool success = _studentRepo.DeleteStudentByID(id);
-            if (success)
+            try
             {
-                return Ok("Student deleted successfully.");
+                bool success = _studentRepo.DeleteStudentByID(id);
+                if (success)
+                {
+                    _logger.LogInformation("Student deleted successfully.");
+                    return Ok("Student deleted successfully.");
+                }
+                else
+                {
+                    _logger.LogWarning("Failed to delete student.");
+                    return BadRequest("Failed to delete student.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("Failed to delete student.");
+
+                _logger.LogError("Error Finding  the  student with specified id : {ErrorMessage}", ex.Message);
             }
+            return BadRequest(ModelState);  
         }
     }
 }

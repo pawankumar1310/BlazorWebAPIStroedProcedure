@@ -52,7 +52,6 @@ namespace BlazorWebAPIStroedProcedure.DataRepository
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             }
