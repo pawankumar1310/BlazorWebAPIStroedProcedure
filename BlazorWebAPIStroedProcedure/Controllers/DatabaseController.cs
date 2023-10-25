@@ -32,11 +32,9 @@ namespace BlazorWebAPIStroedProcedure.Controllers
             using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)))
             {
                 IEnumerable<Student> csvData = csv.GetRecords<Student>();
-
                 using (var connection = new SqlConnection(_configuration.GetConnectionString("ConnectionStrings")))
                 {
                     connection.Open();
-
                     foreach (var csvStudent in csvData)
                     {
                         if (!IsDuplicateStudent(connection, csvStudent.StudentId))
@@ -44,7 +42,6 @@ namespace BlazorWebAPIStroedProcedure.Controllers
                             InsertCsvStudent(connection, csvStudent);
                         }
                     }
-
                     connection.Close();
                 }
             }
